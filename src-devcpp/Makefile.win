@@ -1,0 +1,36 @@
+# Project: staroc
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = 
+OBJ  = master.o slave.o staroc.o $(RES)
+LINKOBJ  = master.o slave.o staroc.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -L"C:/Program Files (x86)/MPICH2/lib" -lmpi  
+INCS =  -I"C:/Dev-Cpp/include"  -I"C:/Program Files (x86)/MPICH2/include" 
+CXXINCS =  -I"C:/Dev-Cpp/lib/gcc/mingw32/3.4.2/include"  -I"C:/Dev-Cpp/include/c++/3.4.2/backward"  -I"C:/Dev-Cpp/include/c++/3.4.2/mingw32"  -I"C:/Dev-Cpp/include/c++/3.4.2"  -I"C:/Dev-Cpp/include"  -I"C:/Program Files (x86)/MPICH2/include" 
+BIN  = staroc.exe
+CXXFLAGS = $(CXXINCS)   -DMPICH_IGNORE_CXX_SEEK
+CFLAGS = $(INCS)   -DMPICH_IGNORE_CXX_SEEK
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before staroc.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "staroc.exe" $(LIBS)
+
+master.o: master.c
+	$(CPP) -c master.c -o master.o $(CXXFLAGS)
+
+slave.o: slave.c
+	$(CPP) -c slave.c -o slave.o $(CXXFLAGS)
+
+staroc.o: staroc.c
+	$(CPP) -c staroc.c -o staroc.o $(CXXFLAGS)
